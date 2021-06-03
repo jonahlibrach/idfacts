@@ -1,25 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import './protocol_style.css';
+import data from './data.js';
+import { useState } from 'react';
+import Top from './Top';
+import SelectedPage from './SelectedPage';
 
-function App() {
+import chapterMap from './chapterMap.json';
+
+export default function App() {
+  let [selection,setSelection] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {selection && <SelectedPage {...{
+        chapter:chapterMap[selection],
+        title:selection,setSelection
+      }}/>}
+      {!selection && <Top {...{setSelection}}/>}
     </div>
   );
 }
 
-export default App;
